@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Test WebApi</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="qs.js"></script>
+</head>
+<body>
+    <button id="btnGet1">Get1</button>
+    <button id="btnGet2">Get2</button>
+    <button id="btnGet3">Get3</button>
+    <button id="btnGetVaue">GetValue</button>
+    <button id="btnPost">Post</button>
+    <button id="btnPost2">Post2</button>
+    <button id="btnPut">Put</button>
+    <button id="btnDelete">Delete</button>
+
+    <script>
+        document.querySelector('#btnGet1').onclick = function () {
+            axios.get('https://localhost:44374/Home').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnGet2').onclick = function () {
+            axios.get('https://localhost:44374/Home?str=test').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnGet3').onclick = function () {
+            axios.get('https://localhost:44374/Home/1234').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnGetVaue').onclick = function () {
+            axios.get('https://localhost:44374/Home/GetValue/3').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnPost').onclick = function () {
+            axios.post('https://localhost:44374/Home').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnPost2').onclick = function () {
+            var userName = 'Mark';
+
+            // 此方法走的是 json data
+            axios.post('https://localhost:44374/Home/Post', { name: userName, age: 30 }).then(function (res) {
+                console.log(res.data);
+            });
+
+            // 用 Form data 傳輸的三個方法
+            // 方法 1：自行拼接字串
+            //var postData = `name=${userName}`;
+            //axios.post('https://localhost:44374/Home/Post', postData).then(function (res) {
+            //    console.log(res.data);
+            //});
+
+            // 方法 2：通過實例化 URLSearchParams，用參數的方法添加
+            //var postData = new URLSearchParams();
+            //postData.append("name", userName);
+            //postData.append("age", 20);
+            //axios.post('https://localhost:44374/Home/Post', postData).then(function(res) {
+            //    console.log(res.data);
+            //});
+
+            // 方法 3：直接引用 Qs.stringify()
+            //axios.post('https://localhost:44374/Home/Post', Qs.stringify({name: 'Mark', age: 18})).then(function (res) {
+            //    console.log(res.data);
+            //});
+        }
+
+        document.querySelector('#btnPut').onclick = function () {
+            axios.put('https://localhost:44374/Home').then(function (res) {
+                console.log(res.data);
+            });
+        }
+
+        document.querySelector('#btnDelete').onclick = function () {
+            axios.delete('https://localhost:44374/Home').then(function (res) {
+                console.log(res.data);
+            });
+        }
+    </script>
+</body>
+</html>
