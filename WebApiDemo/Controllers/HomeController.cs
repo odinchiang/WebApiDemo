@@ -37,6 +37,13 @@ namespace WebApiDemo.Controllers
             return $"GetValue {id}";
         }
 
+        // https://localhost:44374/Home/1234/Mark
+        [HttpGet("{id}/{name}")]
+        public string Get(int id, string name)
+        {
+            return $"GetValue {id}: {name}";
+        }
+
         [HttpGet("/GetValue2")]
         public string GetValue2()
         {
