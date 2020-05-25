@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using WebApiDemo.Filters;
 using WebApiDemo.Models;
 
 namespace WebApiDemo.Controllers
 {
+    [CtmActionFilter]
     [EnableCors("any")]
     [Route("[controller]")]
     [ApiController]
@@ -24,6 +26,7 @@ namespace WebApiDemo.Controllers
 
         // https://localhost:44374/Home
         // https://localhost:44374/Home?str=test
+        //[CtmActionFilter]
         [HttpGet]
         public string Get(string str)
         {
@@ -51,7 +54,7 @@ namespace WebApiDemo.Controllers
         }
 
         // https://localhost:44374/Home/GetValue/3
-        [HttpGet("/[controller]/GetValue/{id}")]
+        [HttpGet("GetValue/{id}")]
         public string GetValue(int id)
         {
             return $"Get {id}";

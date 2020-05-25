@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebApiDemo.Filters;
 
 namespace WebApiDemo
 {
@@ -44,7 +45,10 @@ namespace WebApiDemo
                 x.IncludeXmlComments(xmlPath);
             });
 
-            services.AddControllers();
+            //services.AddControllers();
+
+            // 全域使用 action filter
+            services.AddControllers(o => o.Filters.Add(typeof(CtmActionFilterAttribute)));
         }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace WebApiDemo
 
             app.UseRouting();
 
-            // 跨域存取
+            // 跨域存取 (一定要放在 UseRouting 下面)
             app.UseCors();
 
             app.UseAuthorization();
