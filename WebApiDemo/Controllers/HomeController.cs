@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using System;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApiDemo.Filters;
 using WebApiDemo.Models;
 
 namespace WebApiDemo.Controllers
 {
-    [CtmActionFilter]
     [EnableCors("any")]
     [Route("[controller]")]
     [ApiController]
@@ -26,10 +26,14 @@ namespace WebApiDemo.Controllers
 
         // https://localhost:44374/Home
         // https://localhost:44374/Home?str=test
-        //[CtmActionFilter]
+        [CtmAuthorizationFilter]
+        [CtmResourceFilter]
+        [CtmExceptionFilter]
+        [CtmActionFilter]
         [HttpGet]
         public string Get(string str)
         {
+            throw new Exception("error");
             return $"GetValue {str}";
         }
 

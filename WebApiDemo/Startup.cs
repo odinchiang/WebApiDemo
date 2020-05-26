@@ -45,10 +45,10 @@ namespace WebApiDemo
                 x.IncludeXmlComments(xmlPath);
             });
 
-            //services.AddControllers();
+            services.AddControllers();
 
             // ¥þ°ì¨Ï¥Î action filter
-            services.AddControllers(o => o.Filters.Add(typeof(CtmActionFilterAttribute)));
+            //services.AddControllers(o => o.Filters.Add(typeof(CtmActionFilterAttribute)));
         }
 
         /// <summary>
